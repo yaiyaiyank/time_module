@@ -1,0 +1,2 @@
+class TimeDelta:
+    pass
