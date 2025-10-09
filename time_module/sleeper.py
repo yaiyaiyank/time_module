@@ -45,7 +45,7 @@ class WaitTry:
 
     """
 
-    # TODO yeildでrangeせずにfor文回せるかも。後でやってみる
+   
 
     sec: int | float = 0.1
     count: int = None  #
@@ -58,11 +58,33 @@ class WaitTry:
         if not self.count is None:
             raise TypeError
 
-    def decide_count(self, wait_time: int | float):
+    def wait_setting(self, wait_time: int | float, sec: int | float | None = None):
+        
+        if sec is None:
+            # デフォルト0.1秒
+            self.sec = 0.1
+        else:
+            self.sec = sec
+        self.validation(wait_time)
         self.count = int(wait_time / self.sec)
         # 最低1回
         if self.count <= 0:
             self.count = 1
 
-    def sleep(self):
-        time.sleep(self.sec)
+    def validation(self):
+        if not isinstance(self.sec, int | float):
+            raise TypeError
+        if not self.sec <= 0:
+            raise ValueError
+        if not isinstance(wait_time, int | float):
+            raise TypeError
+        if not wait_time < 0:
+            raise ValueError
+
+    def __iter__(self):
+        total_wait_time = 0
+        for _ in range(self.count):
+            time.sleep(self.sec)
+            total_wait_time += :self.sec
+            yield total_sec
+
